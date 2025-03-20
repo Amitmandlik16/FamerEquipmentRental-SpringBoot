@@ -33,8 +33,8 @@ public class Equipment {
 	@Column(nullable = false, length = 500)
 	private String description;
 
-	@Column(name = "equipment_condition", nullable = false) // ✅ Renamed from `condition`
-	private String equipmentCondition; // New name to avoid MySQL reserved word issue
+	@Column(name = "equipment_condition", nullable = false) // ✅ Added Equipment Condition
+	private String equipmentCondition; // e.g., "New", "Used", "Refurbished"
 
 	@Column(nullable = true)
 	private String warranty; // e.g., "1 Year"

@@ -16,7 +16,7 @@ public class EquipmentController {
 
 	private final EquipmentService equipmentService;
 
-	// ✅ Register Equipment with Image IDs
+	// ✅ Register Equipment with Equipment Condition and Image IDs
 	@PostMapping("/register")
 	public ResponseEntity<Equipment> registerEquipment(@RequestBody Equipment equipment) {
 		Equipment savedEquipment = equipmentService.registerEquipment(equipment);
