@@ -13,6 +13,7 @@ import com.farmer.service.FileService;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/files")
 @RequiredArgsConstructor
