@@ -33,7 +33,7 @@ public class Equipment {
 	@Column(nullable = false, length = 500)
 	private String description;
 
-	@Column(nullable = false)
+	@Column(name = "equpiment_conditions", nullable = true)
 	private String Equipmentcondition; // New, Used, Refurbished
 
 	@Column(nullable = true)
