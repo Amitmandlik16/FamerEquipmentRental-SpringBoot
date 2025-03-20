@@ -34,7 +34,7 @@ public class Equipment {
 	private String description;
 
 	@Column(nullable = false)
-	private String condition; // New, Used, Refurbished
+	private String Equipmentcondition; // New, Used, Refurbished
 
 	@Column(nullable = true)
 	private String warranty; // Optional: Warranty period (e.g., 1 year)
