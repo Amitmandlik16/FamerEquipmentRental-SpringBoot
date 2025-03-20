@@ -44,7 +44,7 @@ public class FarmerController {
 		return ResponseEntity.ok(savedComplaint);
 	}
 
-	// ✅ Get All Feedback API
+	// ✅ Get All Complaints API
 	@GetMapping("/complaint/all")
 	public ResponseEntity<List<Complaint>> getAllComplaints() {
 		List<Complaint> complaintList = complaintService.getAllComplaints();
