@@ -80,7 +80,7 @@ public class FarmerService {
 		farmer.setFirstName(farmerDetails.getFirstName());
 		farmer.setMiddleName(farmerDetails.getMiddleName());
 		farmer.setLastName(farmerDetails.getLastName());
-		farmer.setProfileImg(farmerDetails.getProfileImg());
+		farmer.setProfileImgId(farmerDetails.getProfileImgId());;
 		farmer.setCountry(farmerDetails.getCountry());
 		farmer.setState(farmerDetails.getState());
 		farmer.setTaluka(farmerDetails.getTaluka());

@@ -86,8 +86,7 @@ public class Farmer {
 	@Column(name = "total_rewards")
 	private int totalRewards;
 
-	// Reference to profile image using FileEntity
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "profile_img_id", referencedColumnName = "id")
-	private FileEntity profileImg;
+	// Store only profile image ID
+	@Column(name = "profile_img_id")
+	private Long profileImgId;
 }
