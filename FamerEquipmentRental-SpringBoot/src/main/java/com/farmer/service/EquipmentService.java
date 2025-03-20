@@ -13,6 +13,11 @@ public class EquipmentService {
 
 	private final EquipmentRepository equipmentRepository;
 
+	// ✅ Get All Equipments
+	public List<Equipment> getAllEquipments() {
+		return equipmentRepository.findAll();
+	}
+
 	// ✅ Register New Equipment
 	public Equipment registerEquipment(Equipment equipment) {
 		return equipmentRepository.save(equipment);

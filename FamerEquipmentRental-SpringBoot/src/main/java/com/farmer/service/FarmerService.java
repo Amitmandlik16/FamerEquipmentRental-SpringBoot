@@ -55,6 +55,11 @@ public class FarmerService {
 				() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password"));
 	}
 
+	// ✅ Get All Farmers
+	public List<Farmer> getAllFarmers() {
+		return farmerRepo.findAll();
+	}
+
 	// ✅ Register new farmer
 	public Farmer createFarmer(Farmer farmer) throws IOException {
 		farmer.setTotalEquipment(0);
@@ -80,7 +85,8 @@ public class FarmerService {
 		farmer.setFirstName(farmerDetails.getFirstName());
 		farmer.setMiddleName(farmerDetails.getMiddleName());
 		farmer.setLastName(farmerDetails.getLastName());
-		farmer.setProfileImgId(farmerDetails.getProfileImgId());;
+		farmer.setProfileImgId(farmerDetails.getProfileImgId());
+		;
 		farmer.setCountry(farmerDetails.getCountry());
 		farmer.setState(farmerDetails.getState());
 		farmer.setTaluka(farmerDetails.getTaluka());
