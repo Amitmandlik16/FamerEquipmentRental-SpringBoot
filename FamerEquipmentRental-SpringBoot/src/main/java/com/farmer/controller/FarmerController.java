@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -49,6 +50,13 @@ public class FarmerController {
 		return feedbackService.saveFeedback(feedback);
 	}
 
+	// ✅ Get All Feedback API
+	@GetMapping("/feedback/all")
+	public ResponseEntity<List<Feedback>> getAllFeedback() {
+		List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
+		return ResponseEntity.ok(feedbackList);
+	}
+
 	// ✅ Login API
 	@PostMapping("/login")
 	public ResponseEntity<Farmer> login(@RequestBody Map<String, String> request) {
@@ -58,9 +66,8 @@ public class FarmerController {
 	// ✅ Register Farmer API
 	@PostMapping("/register")
 	public ResponseEntity<Farmer> registerFarmer(@RequestBody Farmer farmer) throws IOException {
-	    return ResponseEntity.ok(farmerService.createFarmer(farmer));
+		return ResponseEntity.ok(farmerService.createFarmer(farmer));
 	}
-
 
 	// ✅ Get Farmer by ID
 	@GetMapping("/{id}")
