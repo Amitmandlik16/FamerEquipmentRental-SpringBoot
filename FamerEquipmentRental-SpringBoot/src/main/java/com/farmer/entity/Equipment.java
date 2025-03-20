@@ -33,20 +33,20 @@ public class Equipment {
 	@Column(nullable = false, length = 500)
 	private String description;
 
-	@Column(name = "equpiment_conditions", nullable = true)
-	private String Equipmentcondition; // New, Used, Refurbished
+	@Column(name = "equipment_condition", nullable = false) // ✅ Renamed from `condition`
+	private String equipmentCondition; // New name to avoid MySQL reserved word issue
 
 	@Column(nullable = true)
-	private String warranty; // Optional: Warranty period (e.g., 1 year)
+	private String warranty; // e.g., "1 Year"
 
 	@Column(nullable = true)
-	private String equipmentType; // Type of equipment (e.g., Tractor, Harvester)
+	private String equipmentType; // e.g., "Tractor", "Harvester"
 
 	@Column(nullable = true)
 	private int manufactureYear; // Year of manufacture
 
 	@Column(nullable = false)
-	private String usageDuration; // Duration the equipment has been used (e.g., 100 hours)
+	private String usageDuration; // e.g., "200 Hours"
 
 	@Column(nullable = false)
 	private String location; // Village, Taluka, District
@@ -60,11 +60,11 @@ public class Equipment {
 	@Column(nullable = false)
 	private String latitude; // Latitude for map integration
 
-	// Store image IDs as comma-separated values (max 5)
+	// ✅ Store image IDs as comma-separated values
 	@Column(name = "image_ids", nullable = true)
 	private String imageIds;
 
-	// Farmer reference to link the equipment with a farmer
+	// ✅ Farmer reference
 	@ManyToOne
 	@JoinColumn(name = "farmer_id", nullable = false)
 	private Farmer farmer;
