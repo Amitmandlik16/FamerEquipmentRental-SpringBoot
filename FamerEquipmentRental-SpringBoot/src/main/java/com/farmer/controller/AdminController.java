@@ -27,7 +27,7 @@ public class AdminController {
 	private final FarmerService farmerService;
 	private final EquipmentService equipmentService;
 
-	// ✅ Login API
+	// ✅ Login API for Admin
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody Admin admin) {
 		return ResponseEntity.ok(adminService.login(admin));
