@@ -49,7 +49,7 @@ public class BookingController {
 		return ResponseEntity.ok(bookingService.markPaymentCompleted(bookingId));
 	}
 
-	// ✅ Check Equipment Availability
+	// ✅ Check Equipment Booked Status
 	@GetMapping("/calendar/{equipmentId}")
 	public ResponseEntity<Map<String, Object>> checkAvailability(@PathVariable Long equipmentId) {
 		return ResponseEntity.ok(bookingService.checkAvailability(equipmentId));
