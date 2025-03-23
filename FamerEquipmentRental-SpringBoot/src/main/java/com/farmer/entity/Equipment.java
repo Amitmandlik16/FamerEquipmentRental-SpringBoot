@@ -28,44 +28,47 @@ public class Equipment {
 	private double price;
 
 	@Column(nullable = false)
+	private double pricePerDay;
+
+	@Column(nullable = false)
 	private int stock;
 
 	@Column(nullable = false, length = 500)
 	private String description;
 
-	@Column(name = "equipment_condition", nullable = false) // ✅ Added Equipment Condition
+	@Column(name = "equipment_condition", nullable = false)
 	private String equipmentCondition; // e.g., "New", "Used", "Refurbished"
 
 	@Column(nullable = true)
-	private String warranty; // e.g., "1 Year"
+	private String warranty;
 
 	@Column(nullable = true)
-	private String equipmentType; // e.g., "Tractor", "Harvester"
+	private String equipmentType;
 
 	@Column(nullable = true)
-	private int manufactureYear; // Year of manufacture
+	private int manufactureYear;
 
 	@Column(nullable = false)
-	private String usageDuration; // e.g., "200 Hours"
+	private String usageDuration;
 
 	@Column(nullable = false)
-	private String location; // Village, Taluka, District
+	private String location;
 
 	@Column(nullable = false)
-	private String pincode; // Location Pincode
+	private String pincode;
 
 	@Column(nullable = false)
-	private String longitude; // Longitude for map integration
+	private String longitude;
 
 	@Column(nullable = false)
-	private String latitude; // Latitude for map integration
+	private String latitude;
 
 	// ✅ Store image IDs as comma-separated values
 	@Column(name = "image_ids", nullable = true)
 	private String imageIds;
 
-	// ✅ Farmer reference
+	// ✅ Add Farmer reference (Owner)
 	@ManyToOne
 	@JoinColumn(name = "farmer_id", nullable = false)
-	private Farmer farmer;
+	private Farmer owner; // ✅ Updated here
 }

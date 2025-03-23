@@ -25,7 +25,7 @@ public class EquipmentService {
 
 	// ✅ Get All Equipments by Farmer ID
 	public List<Equipment> getEquipmentsByFarmerId(Long farmerId) {
-		return equipmentRepository.findByFarmerId(farmerId);
+		return equipmentRepository.findByOwnerId(farmerId);
 	}
 
 	// ✅ Get Equipment by ID
