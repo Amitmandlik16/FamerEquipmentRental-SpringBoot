@@ -5,9 +5,7 @@ import com.farmer.service.voiceNavigationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/voice-assistant")
@@ -27,13 +26,26 @@ public class VoiceNavigationController {
 	private voiceNavigationService voiceNavigationService;
 
 	@PostMapping("/audio")
-	public ResponseEntity<ByteArrayResource> generateSpeech(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<ByteArrayResource> generateSpeech(@RequestParam("file") MultipartFile file,
+			@RequestParam("data") String jsonData) {
 		try {
+			// Parse JSON data to extract farmerId
+			Map<String, Object> requestData = voiceNavigationService.parseJsonData(jsonData);
+
+			// Get farmerId from parsed data
+			Long farmerId = requestData.containsKey("farmerId") ? Long.parseLong(requestData.get("farmerId").toString())
+					: null;
+
+			if (farmerId == null) {
+				return ResponseEntity.badRequest().build();
+			}
+
 			// Convert MultipartFile to File
 			File convertedFile = convertMultipartFileToFile(file);
 
-			// Directly return the response if voiceReadProcess returns ResponseEntity
-			ResponseEntity<ByteArrayResource> response = voiceNavigationService.voiceReadProcess(convertedFile);
+			// Process audio with farmerId
+			ResponseEntity<ByteArrayResource> response = voiceNavigationService.voiceReadProcess(convertedFile,
+					farmerId);
 
 			// Clean up temporary file after processing
 			convertedFile.delete();
