@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//Bookings Table
 @Entity
 @Table(name = "bookings")
 @Data
