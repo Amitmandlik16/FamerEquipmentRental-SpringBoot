@@ -25,9 +25,9 @@ public class Like {
 	private Post post;
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = { "password", "firstName", "middleName", "lastName", "profileImg",
-			"country", "state", "district", "village", "pincode", "longitude", "latitude", "mobileNumber",
-			"email", "dob" })
+	@JsonIgnoreProperties(value = { "username", "password", "middleName", "country", "state", "district", "taluka",
+			"village", "pincode", "longitude", "latitude", "DOB", "landmark", "totalEquipment", "ratingAsGiver",
+			"ratingAsTaker", "totalRentalsGiven", "totalRentalsTaken", "totalRewards", "profileImgId" })
 	@JoinColumn(name = "farmer_id", nullable = false)
 	private Farmer farmer;
 

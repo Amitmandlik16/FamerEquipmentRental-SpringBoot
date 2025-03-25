@@ -21,9 +21,9 @@ public class Post {
 
 	@ManyToOne
 	@JoinColumn(name = "farmer_id", nullable = false)
-	@JsonIgnoreProperties(value = { "password", "firstName", "middleName", "lastName", "profileImg",
-			"country", "state", "district", "village", "pincode", "longitude", "latitude", "mobileNumber",
-			"email", "dob" })
+	@JsonIgnoreProperties(value = { "username", "password", "middleName", "country", "state", "district", "taluka",
+			"village", "pincode", "longitude", "latitude", "DOB", "landmark", "totalEquipment", "ratingAsGiver",
+			"ratingAsTaker", "totalRentalsGiven", "totalRentalsTaken", "totalRewards", "profileImgId" })
 	private Farmer farmer;
 
 	@Column(nullable = false)

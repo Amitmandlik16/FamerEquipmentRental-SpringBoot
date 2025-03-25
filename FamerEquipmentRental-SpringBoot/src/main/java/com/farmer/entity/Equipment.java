@@ -1,5 +1,7 @@
 package com.farmer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -69,6 +71,9 @@ public class Equipment {
 
 	// ✅ Add Farmer reference (Owner)
 	@ManyToOne
+	@JsonIgnoreProperties(value = { "username", "password", "middleName", "country", "state", "district", "taluka",
+			"village", "pincode", "longitude", "latitude", "DOB", "landmark", "totalEquipment", "ratingAsGiver",
+			"ratingAsTaker", "totalRentalsGiven", "totalRentalsTaken", "totalRewards", "profileImgId" })
 	@JoinColumn(name = "farmer_id", nullable = false)
 	private Farmer owner; // ✅ Updated here
 }

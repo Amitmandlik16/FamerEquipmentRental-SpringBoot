@@ -18,6 +18,13 @@ public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;
+	
+	// ✅ Get Booking Requests by Farmer ID
+		@GetMapping("/requests/{farmerId}")
+		public ResponseEntity<List<Booking>> getBookingsByFarmerId(@PathVariable Long farmerId) {
+			List<Booking> bookings = bookingService.getBookingsByFarmerId(farmerId);
+			return ResponseEntity.ok(bookings);
+		}
 
 	// ✅ Create Booking Request
 	@PostMapping("/request")

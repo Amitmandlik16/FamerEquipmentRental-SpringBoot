@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "labor_bookings")
 @Data
@@ -18,6 +20,9 @@ public class LaborBooking {
 	private Long id;
 
 	@ManyToOne
+	@JsonIgnoreProperties(value = { "experience", "location", "pincode", "longitude", "latitude", "imageIds",
+			"password" })
+
 	@JoinColumn(name = "labor_id", nullable = false)
 	private Labor labor;
 

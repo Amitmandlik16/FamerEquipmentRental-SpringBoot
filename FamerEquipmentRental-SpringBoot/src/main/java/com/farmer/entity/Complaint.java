@@ -22,9 +22,9 @@ public class Complaint {
 	private Long id;
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = { "password", "firstName", "middleName", "lastName", "profileImg", "mobileNumber",
-			"email", "country", "state", "district", "taluka", "village", "pincode", "longitude", "latitude",
-			"landmark", "dob" })
+	@JsonIgnoreProperties(value = { "username", "password", "middleName", "country", "state", "district", "taluka",
+			"village", "pincode", "longitude", "latitude", "DOB", "landmark", "totalEquipment", "ratingAsGiver",
+			"ratingAsTaker", "totalRentalsGiven", "totalRentalsTaken", "totalRewards", "profileImgId" })
 	@JoinColumn(name = "farmer_id", nullable = false)
 	private Farmer farmer;
 

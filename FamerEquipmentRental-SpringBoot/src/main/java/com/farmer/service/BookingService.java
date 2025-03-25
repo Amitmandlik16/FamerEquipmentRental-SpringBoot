@@ -129,4 +129,8 @@ public class BookingService {
 		}
 		return false;
 	}
+
+	public List<Booking> getBookingsByFarmerId(Long farmerId) {
+		return bookingRepository.findByEquipment_Owner_Id(farmerId);
+	}
 }
