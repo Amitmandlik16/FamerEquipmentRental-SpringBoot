@@ -67,7 +67,7 @@ public class LaborPDFService {
 			document.add(footer);
 
 			document.add(new Paragraph("\n"));
-			Paragraph contact = new Paragraph("Contact us: farmerrentalservice@gmail.com", footerFont);
+			Paragraph contact = new Paragraph("Contact us: farmingequimentrentalservice@gmail.com", footerFont);
 			contact.setAlignment(Element.ALIGN_CENTER);
 			document.add(contact);
 

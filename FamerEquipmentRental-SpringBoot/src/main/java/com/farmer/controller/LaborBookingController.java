@@ -36,6 +36,17 @@ public class LaborBookingController {
 		return ResponseEntity.ok(bookingService.getAllLaborBookings());
 	}
 
+	// ✅ Get All Labor Bookings by Labor ID
+	@GetMapping("/requests/{laborId}")
+	public ResponseEntity<List<LaborBooking>> getAllBookingsByLaborId(@PathVariable Long laborId) {
+		List<LaborBooking> bookings = bookingService.getAllBookingsByLaborId(laborId);
+
+		if (bookings.isEmpty()) {
+			return ResponseEntity.noContent().build(); // 204 No Content if no bookings found
+		}
+		return ResponseEntity.ok(bookings);
+	}
+
 	// ✅ Approve or Reject Labor Booking
 	@PutMapping("/update/{bookingId}/{status}")
 	public ResponseEntity<LaborBooking> updateBookingStatus(@PathVariable Long bookingId, @PathVariable String status) {

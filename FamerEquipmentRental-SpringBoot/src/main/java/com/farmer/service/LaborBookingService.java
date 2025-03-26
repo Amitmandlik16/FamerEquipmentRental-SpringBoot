@@ -153,6 +153,11 @@ public class LaborBookingService {
 		laborPDFService.generateLaborBookingReceipt(booking, response);
 	}
 
+	// ✅ Get All Labor Bookings by Labor ID
+	public List<LaborBooking> getAllBookingsByLaborId(Long laborId) {
+		return laborBookingRepository.findByLaborId(laborId);
+	}
+
 	// ✅ Calculate Total Price for Booking
 	private double calculateTotalPrice(LaborBooking booking) {
 		long daysBetween = java.time.temporal.ChronoUnit.DAYS.between(booking.getStartDate(), booking.getEndDate()) + 1;

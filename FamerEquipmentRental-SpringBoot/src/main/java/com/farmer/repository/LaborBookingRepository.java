@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface LaborBookingRepository extends JpaRepository<LaborBooking, Long> {
 
+	// ✅ Get Labor Bookings by Labor ID
 	List<LaborBooking> findByLaborId(Long laborId);
 
 	List<LaborBooking> findByLaborIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(Long laborId,
