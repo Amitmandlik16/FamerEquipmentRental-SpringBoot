@@ -164,6 +164,7 @@ public class voiceNavigationService {
 		if (bestMatch == null || bestScore < 0.5) {
 			return "Sorry, I didn't catch that. You can say 'help' for a list of available commands. 🤔";
 		}
+		
 
 		// If similarity is 50% or higher, process the command
 		if (bestScore >= 0.50) {
@@ -173,8 +174,9 @@ public class voiceNavigationService {
 			if (!extractedData.isEmpty()) {
 				return performAction(bestMatch, extractedData, farmerId);
 			} else {
+				// ✅ Return best-matched command response
+				return commandResponses.get(bestMatch);
 				// Command matched but no data extracted
-				return "Please provide the correct format for your request.";
 			}
 		} else {
 			return "Sorry, I didn't understand that. Try using standard commands.";
