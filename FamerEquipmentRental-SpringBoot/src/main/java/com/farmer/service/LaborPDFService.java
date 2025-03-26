@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class LaborPDFService {
 
-	private static final String LOGO_TOP_PATH = "src/main/resources/static/farmlogo2.jpeg";
+	private static final String LOGO_TOP_PATH = "src/main/resources/static/laborlogo.jpeg";
 	private static final String LOGO_BG_PATH = "https://t3.ftcdn.net/jpg/06/55/98/66/360_F_655986634_Ru3c5b8fedJfcwS4dGEI5y3bTokyWJEp.jpg";
 
 	public void generateLaborBookingReceipt(LaborBooking booking, HttpServletResponse response) throws IOException {

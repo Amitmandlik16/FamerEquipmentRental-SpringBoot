@@ -39,8 +39,10 @@ public class EquipmentService {
 			equipmentDTO.setCategory(equipmentCategoryMap.getOrDefault(equipment.getCategory(), -1));
 			equipmentDTO.setFarm_type(equipmentFarmSizeMap.getOrDefault(equipment.getFarmSize(), -1));
 			equipmentDTO.setQuality(equipmentQualityMap.getOrDefault(equipment.getEquipmentCondition(), -1));
-			equipmentDTO.setLongitude(longitude != null ? Double.parseDouble(longitude.toString()) : null);
-			equipmentDTO.setLatitude(latitude != null ? Double.parseDouble(latitude.toString()) : null);
+			equipmentDTO.setLongitude(
+					equipment.getLongitude() != null ? Double.parseDouble(equipment.getLongitude().toString()) : null);
+			equipmentDTO.setLatitude(
+					equipment.getLatitude() != null ? Double.parseDouble(equipment.getLatitude().toString()) : null);
 			if (equipmentDTO.getCategory() != -1 && equipmentDTO.getFarm_type() != -1
 					&& equipmentDTO.getQuality() != -1) {
 				equipments.add(equipmentDTO);
