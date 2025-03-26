@@ -6,7 +6,15 @@ import com.farmer.repository.EquipmentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -16,35 +24,29 @@ public class EquipmentService {
 
 	private final EquipmentRepository equipmentRepository;
 
-	public Equipment getRecommendedEquipment(String typeOfWork, String farmSize, String latitude, String longitude) {
+	public String getRecommendedEquipment(String typeOfWork, String farmSize, String latitude, String longitude) {
 		List<Equipment> equipmentList = equipmentRepository.findAll();
 
 		int user_category = equipmentCategoryMap.getOrDefault(typeOfWork, -1);
 		int user_farm_type = equipmentFarmSizeMap.getOrDefault(farmSize, -1);
 
-//		System.out.println("\nData Received from farmer for AI Equipment Sugession");
-//		System.out.println("user_category:" + user_category);
-//		System.out.println("user_farm_type:" + user_farm_type);
-//		System.out.println("longitude:" + longitude);
-//		System.out.println("lattitude:" + latitude);
-
 		System.out.println("\n Equipments data fetched from database");
 
-		List<EquipmentDTO> equipments = new ArrayList<EquipmentDTO>();
-		EquipmentDTO equipmentDTO;
-
+		List<EquipmentDTO> equipments = new ArrayList<>();
 		for (Equipment equipment : equipmentList) {
-			equipmentDTO = new EquipmentDTO();
-
+			EquipmentDTO equipmentDTO = new EquipmentDTO();
 			equipmentDTO.setId(equipment.getId());
 			equipmentDTO.setCategory(equipmentCategoryMap.getOrDefault(equipment.getCategory(), -1));
 			equipmentDTO.setFarm_type(equipmentFarmSizeMap.getOrDefault(equipment.getFarmSize(), -1));
 			equipmentDTO.setQuality(equipmentQualityMap.getOrDefault(equipment.getEquipmentCondition(), -1));
-			equipmentDTO.setLongitude(equipment.getLongitude());
-			equipmentDTO.setLatitude(equipment.getLatitude());
-			equipments.add(equipmentDTO);
-
+			equipmentDTO.setLongitude(longitude != null ? Double.parseDouble(longitude.toString()) : null);
+			equipmentDTO.setLatitude(latitude != null ? Double.parseDouble(latitude.toString()) : null);
+			if (equipmentDTO.getCategory() != -1 && equipmentDTO.getFarm_type() != -1
+					&& equipmentDTO.getQuality() != -1) {
+				equipments.add(equipmentDTO);
+			}
 		}
+
 		try {
 			Map<String, Object> logData = new HashMap<>();
 			logData.put("request_id", "req_" + UUID.randomUUID());
@@ -56,14 +58,32 @@ public class EquipmentService {
 
 			String jsonLog = new ObjectMapper().writeValueAsString(logData);
 			System.out.println("\n Request Json Created");
-			System.out.println(jsonLog); // ✅ Prints JSON to console
+			System.out.println(jsonLog);
 
+			// Send API Request
+			RestTemplate restTemplate = new RestTemplate();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> requestEntity = new HttpEntity<>(jsonLog, headers);
+
+			ResponseEntity<String> responseEntity = restTemplate.exchange(
+					"https://ultrazone-production.up.railway.app/api/recommend/", HttpMethod.POST, requestEntity,
+					String.class);
+
+			if (responseEntity.getStatusCode() == HttpStatus.OK) {
+				String responseJson = responseEntity.getBody();
+				System.out.println("\n Response Received:");
+				System.out.println(responseJson);
+
+				return responseJson;
+			} else {
+				System.err.println("Failed to fetch recommendations. HTTP Status: " + responseEntity.getStatusCode());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// ✅ Return the first matching equipment or null if none found
-		return null;
+		return null; // Return null if request fails
 	}
 
 	// ✅ Mappings for Equipment_Category

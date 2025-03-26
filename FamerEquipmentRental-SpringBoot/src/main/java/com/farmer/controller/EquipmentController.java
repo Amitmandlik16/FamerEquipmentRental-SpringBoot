@@ -20,20 +20,16 @@ public class EquipmentController {
 	private final EquipmentService equipmentService;
 
 	@PostMapping("/recommend")
-	public ResponseEntity<?> getRecommendedEquipment(@RequestBody Map<String, Object> request) {
+	public String getRecommendedEquipment(@RequestBody Map<String, Object> request) {
 		String typeOfWork = (String) request.get("typeOfWork");
 		String farmSize = (String) request.get("farmSize");
 		String latitude = (String) request.get("latitude");
 		String longitude = (String) request.get("longitude");
 
-		Equipment recommendedEquipment = equipmentService.getRecommendedEquipment(typeOfWork, farmSize, latitude,
+		return equipmentService.getRecommendedEquipment(typeOfWork, farmSize, latitude,
 				longitude);
 
-		if (recommendedEquipment == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body(Collections.singletonMap("error", "No equipment found for the specified criteria."));
-		}
-		return ResponseEntity.ok(recommendedEquipment);
+		
 	}
 
 	// ✅ Register Equipment with Equipment Condition and Image IDs
