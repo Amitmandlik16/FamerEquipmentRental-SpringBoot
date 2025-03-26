@@ -48,6 +48,9 @@ public class Equipment {
 	private String equipmentType;
 
 	@Column(nullable = true)
+	private String FarmSize;
+
+	@Column(nullable = true)
 	private int manufactureYear;
 
 	@Column(nullable = false)

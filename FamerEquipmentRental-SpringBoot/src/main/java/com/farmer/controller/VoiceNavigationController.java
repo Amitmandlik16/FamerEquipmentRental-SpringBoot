@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/voice-assistant")
 public class VoiceNavigationController {
 

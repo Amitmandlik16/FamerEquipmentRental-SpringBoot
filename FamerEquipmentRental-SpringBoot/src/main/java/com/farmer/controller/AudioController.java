@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/audio")
 public class AudioController {
 

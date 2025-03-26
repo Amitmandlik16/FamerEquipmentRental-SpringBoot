@@ -25,6 +25,12 @@ public class BookingController {
 			List<Booking> bookings = bookingService.getBookingsByFarmerId(farmerId);
 			return ResponseEntity.ok(bookings);
 		}
+		// ✅ Get Booking Requests by Borrower ID
+		@GetMapping("/borrower-requests/{farmerId}")
+		public ResponseEntity<List<Booking>> getBookingsByBorrowerId(@PathVariable Long farmerId) {
+			List<Booking> bookings = bookingService.getBookingsByBorrowerId(farmerId);
+			return ResponseEntity.ok(bookings);
+		}
 
 	// ✅ Create Booking Request
 	@PostMapping("/request")

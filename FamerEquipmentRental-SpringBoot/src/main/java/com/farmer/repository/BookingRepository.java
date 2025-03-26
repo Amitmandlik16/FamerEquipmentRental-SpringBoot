@@ -13,4 +13,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 	// ✅ Get Booking Requests by Farmer ID
 	List<Booking> findByEquipment_Owner_Id(Long farmerId);
 
+	// ✅ Get Booking done by Farmer(Borrower) ID
+	List<Booking> findByBorrower_Id(Long borrowerId);
+
 }

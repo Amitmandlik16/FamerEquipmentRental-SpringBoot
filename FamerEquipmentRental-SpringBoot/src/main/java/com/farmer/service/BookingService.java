@@ -133,4 +133,7 @@ public class BookingService {
 	public List<Booking> getBookingsByFarmerId(Long farmerId) {
 		return bookingRepository.findByEquipment_Owner_Id(farmerId);
 	}
+	public List<Booking> getBookingsByBorrowerId(Long farmerId) {
+		return bookingRepository.findByBorrower_Id(farmerId);
+	}
 }
