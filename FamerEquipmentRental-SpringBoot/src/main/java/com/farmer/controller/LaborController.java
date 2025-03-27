@@ -24,7 +24,7 @@ public class LaborController {
 
 	// ✅ Labor Login API
 	@PostMapping("/login")
-	public ResponseEntity<String> loginLabor(@RequestBody Map<String, String> request) {
+	public ResponseEntity<Labor> loginLabor(@RequestBody Map<String, String> request) {
 		String email = request.get("email");
 		String password = request.get("password");
 		return ResponseEntity.ok(laborService.loginLabor(email, password));

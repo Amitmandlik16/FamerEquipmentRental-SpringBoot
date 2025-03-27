@@ -38,16 +38,19 @@ public class LaborService {
 		return laborRepository.findByLocationContaining(location);
 	}
 
-	// ✅ Labor Login
-	public String loginLabor(String email, String password) {
+	public Labor loginLabor(String email, String password) {
 		Labor labor = laborRepository.findByEmail(email);
 
 		if (labor == null) {
-			return "❌ Login failed: No labor found with this email.";
+			throw new RuntimeException("Labor not found with email: " + email);
 		}
+
 		if (!labor.getPassword().equals(password)) {
-			return "❌ Login failed: Incorrect password.";
+			throw new RuntimeException("Invalid credentials! Please check your email or password.");
 		}
-		return "✅ Login successful! Welcome " + labor.getName()+"\n Labor Id= "+labor.getId();
+
+		System.out.println("✅ Login successful! Welcome " + labor.getName()); // Optional: Logging
+		return labor; // Return the authenticated Labor object
 	}
+
 }
