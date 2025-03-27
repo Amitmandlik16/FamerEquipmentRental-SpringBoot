@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.concurrent.RejectedExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,8 @@ public class EquipmentService {
 
 		int user_category = equipmentCategoryMap.getOrDefault(typeOfWork, -1);
 		int user_farm_type = equipmentFarmSizeMap.getOrDefault(farmSize, -1);
+		System.out.println("user_category" + user_category);
+		System.out.println("user_farn_type" + user_farm_type);
 
 		System.out.println("\n Equipments data fetched from database");
 
@@ -46,6 +49,9 @@ public class EquipmentService {
 			if (equipmentDTO.getCategory() != -1 && equipmentDTO.getFarm_type() != -1
 					&& equipmentDTO.getQuality() != -1) {
 				equipments.add(equipmentDTO);
+				System.out.println("Accepted Record " + equipmentDTO.toString());
+			} else {
+				System.out.println("Rejected Record " + equipmentDTO.toString());
 			}
 		}
 
