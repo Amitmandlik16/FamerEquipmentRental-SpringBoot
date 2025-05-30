@@ -75,7 +75,7 @@ public class EquipmentService {
 			HttpEntity<String> requestEntity = new HttpEntity<>(jsonLog, headers);
 
 			ResponseEntity<String> responseEntity = restTemplate.exchange(
-					"https://ultrazone-production.up.railway.app/api/recommend/", HttpMethod.POST, requestEntity,
+					"https://recommendationengine-production.up.railway.app/api/recommend/", HttpMethod.POST, requestEntity,
 					String.class);
 
 			if (responseEntity.getStatusCode() == HttpStatus.OK) {
